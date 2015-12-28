@@ -1,0 +1,31 @@
+<script id="h_billing_form" type="text/x-handlebars-template">
+	<div class="form_in">
+		<h3 class="text-left">{{{GetLanguageTranslation 'Billing_Address'}}}</h3>
+
+		<div class="address-block">
+			<p>{{{GetLanguageTranslation 'Select_a_billing_address_from_your_address_book_or_enter_a_new_address'}}}</p>
+			{{#ifEmptyObject unique_addresses}}
+				{{#each unique_addresses}}
+					<div class="add-block">
+						<input type="radio" name="billing_address_id" value="{{id}}" id="billing_address_id_{{id}}" onclick="app.f.showhide_checkout_address_area('{{id}}', 'div_new_billing_address')" {{#ifCond @index '==' '0'}}checked{{/ifCond}}>
+	    				<label for="billing_address_id_{{id}}">{{{fullname}}}<br>{{{street.[0]}}},{{#if street.[1]}} {{{street.[1]}}},{{/if}} {{{city}}}, {{{postcode}}}, {{{region}}}<br>{{{country}}}</label>
+	    			</div>
+				{{/each}}
+			{{/ifEmptyObject}}
+			
+			<div class="add-block">
+				<input type="radio" name="billing_address_id" value="" id="billing_address_id_new" onclick="app.f.showhide_checkout_address_area('', 'div_new_billing_address')">
+	    		<label for="billing_address_id_new">{{{GetLanguageTranslation 'New_Address'}}}</label>
+    		</div>
+		</div>
+		<hr class="block">
+	</div>
+
+	<div class="form_in div_same_as_billing {{#ifShippingRequired}}{{else}}dhide{{/ifShippingRequired}}">
+
+		<h3 class="text-left">{{{GetLanguageTranslation 'Shipping_Address'}}}</h3>
+
+		<input type="checkbox" onclick="app.f.same_as_billing(this, 'shipping_form');"checked="checked" id="billing_same_checkout">
+		<label for="billing_same_checkout">{{{GetLanguageTranslation 'Same_as_billing'}}}</label>
+	</div>
+</script>

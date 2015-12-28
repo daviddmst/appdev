@@ -1,0 +1,98 @@
+<script id="h_address_information" type="text/x-handlebars-template">
+	<div data-role="header" class="topbar" data-tap-toggle="false" data-position="{{#ifMobiAdvanceSetting 'miscellaneous/enable_fixedheader'}}fixed{{/ifMobiAdvanceSetting}}">
+		<table border="0" class="topmenu-tab" cellpadding="0" cellspacing="0" width="100%">
+		  	<tbody>
+	  			<tr>
+	    			<td width="46" align="left"><a href="#" class="icon-back" onclick="app.back();"></a></td>
+	        		<td class="ttl">
+	       				<h1 class="ui-title">{{{GetLanguageTranslation 'Address Book'}}}</h1>
+	        		</td>
+	        		<td width="46" align="right">
+	        			<a href="javascript:void(0)" class="icon-addplus" onclick="app.user.address_information.edit.redirect('new');"></a>
+	        		</td>
+	    		</tr>
+	  		</tbody>
+	  	</table>
+	</div>
+
+	<div data-role="main" class="ui-content">
+		{{PageLoader}}
+		<div class="main-box">
+			<div>
+				{{#if user_details.unique_addresses}}
+					{{#if user_details.billing_address._data.id}}
+						<div class="address-block">
+							<p>
+								<span class="right-button">
+									{{#if user_details.billing_address._data.fullname}}
+										<button class="ui-btn ui-btn-b ui-icon-edit ui-btn-icon-notext" onclick="app.user.address_information.edit.redirect('{{user_details.billing_address._data.id}}')">edit</button>
+									{{/if}}
+								</span>
+								<h3>{{{GetLanguageTranslation 'Default_Billing_Address'}}}</h3>
+								{{#if user_details.billing_address._data.fullname}}
+									<span class="user-name">{{{user_details.billing_address._data.fullname}}}</span><br />
+									{{{user_details.billing_address._data.street.[0]}}},
+									{{#if user_details.billing_address._data.street.[1]}}
+										{{{user_details.billing_address._data.street.[1]}}},
+									{{/if}}
+									{{{user_details.billing_address._data.city}}}, {{{user_details.billing_address._data.postcode}}},
+									{{{user_details.billing_address._data.region}}}<br>
+									{{{user_details.billing_address._data.country}}}
+								{{/if}}
+							</p>
+						</div>
+						<hr class="block">
+					{{/if}}
+					{{#if user_details.shipping_address._data.id}}
+						<div class="address-block">
+							<p>
+								<span class="right-button">
+									{{#if user_details.shipping_address._data.fullname}}
+										<button class="ui-btn ui-btn-b ui-icon-edit ui-btn-icon-notext" onclick="app.user.address_information.edit.redirect('{{user_details.shipping_address._data.id}}')">edit</button>
+									{{/if}}
+								</span>
+								<h3>{{{GetLanguageTranslation 'Default_Shipping_Address'}}}</h3>
+								{{#if user_details.shipping_address._data.fullname}}
+									<span class="user-name">{{{user_details.shipping_address._data.fullname}}}</span><br />
+									{{{user_details.shipping_address._data.street.[0]}}},
+									{{#if user_details.shipping_address._data.street.[1]}}
+										{{{user_details.shipping_address._data.street.[1]}}},
+									{{/if}}
+									{{{user_details.shipping_address._data.city}}}, {{{user_details.shipping_address._data.postcode}}},
+									{{{user_details.shipping_address._data.region}}}<br>
+									{{{user_details.shipping_address._data.country}}}
+								{{/if}}
+							</p>
+						</div>
+						<hr class="block">
+					{{/if}}
+					
+					{{#if user_details.additional_addresses._data.0.id}}					
+						{{#each user_details.additional_addresses._data}}
+							<div class="address-block">
+								<p>
+									<span class="right-button">
+										<button class="ui-btn ui-btn-b ui-icon-edit ui-btn-icon-notext" onclick="app.user.address_information.edit.redirect('{{id}}')">edit</button>
+										<button class="ui-btn ui-btn-b ui-icon-trash ui-btn-icon-notext" onclick="app.user.address_information.delete('{{id}}')">delete</button>
+									</span>
+									<h3>{{{alias}}}</h3>
+							
+									<span class="user-name">{{{fullname}}}</span><br />
+									{{{street.[0]}}}, 
+									{{{street.[1]}}}, 
+									{{{city}}}, {{{postcode}}},
+									{{{region}}}<br>
+									{{{country}}}
+								</p>
+							</div>
+						{{/each}}
+					{{/if}}
+				{{else}}
+					<p>{{{GetLanguageTranslation 'No_Addresses_Found'}}}</p>
+				{{/if}}
+				
+				<a class="ui-btn ui-btn-b" href="javascript:void(0);" onclick="app.user.address_information.edit.redirect('new');">{{{GetLanguageTranslation 'Add_New_Address'}}}</a>
+			</div>
+		</div>
+	</div>
+</script>

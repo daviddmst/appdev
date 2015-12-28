@@ -1,0 +1,57 @@
+
+<!--- -------------------- Cart Page ------------------------------------ -->
+<div data-role="page" id="product_detail">
+
+   <div data-position="fixed" data-tap-toggle="false" class="topbar topbar-auto ui-header ui-bar-inherit ui-header-fixed slidedown" data-role="header" role="banner">
+		<table width="100%" cellspacing="0" cellpadding="0" border="0" class="topmenu-tab">
+			<tbody>
+				<tr>
+					<td width="46" align="left">
+						<a class="icon-back ui-link" href="#home"></a>
+					</td>
+					<td class="ttl">
+					  <h1 class="ui-title">Product Detail</h1>
+				   </td>
+
+					<td width="46" align="right">
+						<a class="icon-search ui-link" onclick="app.search.redirect();" href="javascript:void(0);"></a>
+					</td>
+
+					<td width="46" align="right" class="cart-td">
+						<div onclick="app.cart.redirect();" class="cart-buble">0</div>
+						<a class="icon-cart ui-link" href="javascript:app.cart.redirect();"></a>
+					</td>
+					<td width="46" align="right">
+						<a class="icon-sub-menu ui-link" onclick="app.menu.redirect();" href="javascript:void(0);"></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+   <div class="ui-content" data-role="main">
+      <div style="display:none" id="mobi-page-loader" class="mobi-page-loader"></div>
+      <div class="main-box">
+		
+		<script>
+		//console.log( jQuery( "#category_id" ).val() );	
+		//alert( jQuery( "#category_id" ).val() );	
+		var proid = jQuery( "#pro_id" ).val();
+		MSTMOBILE.product_detail( proid );
+		</script>
+		<div id="conent_product_detail">
+		</div>
+         
+      </div>
+   </div>
+	<div data-tap-toggle="false" data-position="fixed" data-role="footer" role="contentinfo" class="ui-footer ui-bar-inherit ui-footer-fixed slideup">
+	   <div class="footer-button  ">
+		  <div class="half-div">
+			 <a class="ui-btn ui-btn-d icon-share" href="javascript:void(0);">Share</a>
+			 <a class="ui-btn ui-btn-d icon-wishlist" onclick="" href="#" >Wishlist</a>
+		  </div>
+		  <a class="ui-btn ui-btn-c" href="javascript:void(0);">Buy Now</a>
+	   </div>
+	</div>
+</div>
+<!---- ---------------------------------- End cart page ---------------------------------- -->

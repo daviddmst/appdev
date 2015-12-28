@@ -1,0 +1,85 @@
+<script id="h_address_information_edit" type="text/x-handlebars-template">
+	<div data-role="header" class="topbar" data-tap-toggle="false" data-position="{{#ifMobiAdvanceSetting 'miscellaneous/enable_fixedheader'}}fixed{{/ifMobiAdvanceSetting}}">
+		<table border="0" class="topmenu-tab" cellpadding="0" cellspacing="0" width="100%">
+		  	<tbody>
+	  			<tr>
+	    			<td width="46" align="left"><a href="#" class="icon-back" onclick="app.back();"></a></td>
+	        		<td class="ttl">
+	       				<h1 class="ui-title">
+	       					{{#ifCond id '==' 'new'}}
+	       						{{{GetLanguageTranslation 'Add_New_Address'}}}
+	       					{{else}}
+	       						{{{GetLanguageTranslation 'Edit_Address'}}}
+	       					{{/ifCond}}
+	       				</h1>
+	        		</td>
+	    		</tr>
+	  		</tbody>
+	  	</table>
+	</div>
+
+	<div data-role="main" class="ui-content">
+		{{PageLoader}}
+		<div class="main-box">
+			<div>
+				<form onsubmit="return false;">
+					<div class="form_in">
+						<label>{{{GetLanguageTranslation 'Alias'}}}<em>*</em></label>
+						<input type="text" id="alias" value="{{{addressDetails.alias}}}">
+
+						<label>{{{GetLanguageTranslation 'First_name'}}}<em>*</em></label>
+						<input type="text" id="firstname" value="{{{addressDetails.firstname}}}">
+						
+						<label>{{{GetLanguageTranslation 'Last_name'}}}<em>*</em></label>
+						<input type="text" id="lastname" value="{{{addressDetails.lastname}}}">
+
+						<label>{{{GetLanguageTranslation 'Company'}}}</label>
+						<input type="text" id="company" value="{{{addressDetails.company}}}">
+
+						<label>{{{GetLanguageTranslation 'City'}}}<em>*</em></label>
+						<input type="text" id="city" value="{{{addressDetails.city}}}">
+
+						<label class="select">{{{GetLanguageTranslation 'Country'}}}<em>*</em></label>
+						<select id="country_id" onchange="app.f.check_country_state_exists(this, 'textbox_dropdown_state', 'region_id')">
+							{{#if countries}}
+								{{#countries}}
+									<option value="{{iso2}}" {{#ifCond iso2 '==' ../addressDetails.country_id}} selected="selected" {{/ifCond}}>{{name}}</option>
+								{{/countries}}
+							{{/if}}
+						</select>
+						
+						<label class="select">{{{GetLanguageTranslation 'State'}}}<em>*</em></label>
+						<div id="textbox_dropdown_state">
+							{{#if states}}
+								<select id="region_id">
+									{{#states}}
+										<option value="{{region_id}}" {{#ifCond region_id '==' ../addressDetails.region_id}}selected="selected"{{/ifCond}}>{{name}}</option>
+									{{/states}}
+								</select>
+							{{else}}
+								<input type="text" id="region_id" value="{{{addressDetails.region}}}">
+							{{/if}}
+						</div>
+
+						<label>{{{GetLanguageTranslation 'Billing_street'}}}<em>*</em></label>
+						<textarea id="street">{{{addressDetails.street.[0]}}}</textarea>
+
+						<label>{{{GetLanguageTranslation 'Billing_street'}}}</label>
+						<textarea id="street2">{{{addressDetails.street.[1]}}}</textarea>
+
+						<label>{{{GetLanguageTranslation 'Postcode'}}}<em>*</em></label>
+						<input type="number" id="postcode" value="{{{addressDetails.postcode}}}">
+
+						<label>{{{GetLanguageTranslation 'Telephone'}}}<em>*</em></label>
+						<input type="tel" id="telephone" value="{{{addressDetails.telephone}}}">
+
+						<label>{{{GetLanguageTranslation 'Fax'}}}</label>
+						<input type="tel" id="fax" value="{{{addressDetails.fax}}}">
+					</div>
+					
+					<a href="javascript:void(0);" onclick="app.user.address_information.update();" class="ui-btn ui-btn-c">{{{GetLanguageTranslation 'Save_Address'}}}</a>
+				</form>
+			</div>
+		</div>
+	</div>
+</script>

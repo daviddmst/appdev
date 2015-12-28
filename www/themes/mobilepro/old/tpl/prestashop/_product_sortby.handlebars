@@ -1,0 +1,50 @@
+<script id="h_product_sortby" type="text/x-handlebars-template">
+	{{#ifCond current_page_category.display_mode '!=' 'PAGE'}}
+		{{#ifProductFilterView 'all,one_one,two,single,viewonly'}}
+			<div class="theme-search-parent-div">
+				{{#ifProductFilterView 'all,one_one,two,single'}}
+					<div class="filter-bar theme-search">
+						{{#ifMobiAdvanceSetting 'productlist/enablefilter'}}
+							<div class="filter-div {{#ifProductFilterView 'single,one_one'}}no-shadow{{/ifProductFilterView}}" onclick="$('#category-product-filter').popup('open');">
+						    	<div class="filter-by">
+									<span class="label-txt">{{{GetLanguageTranslation 'Filter'}}}</span><br>
+									<div class="applied-label">{{{filterText}}}</div>
+								</div>
+						        <div class="filter-by-active dshow"></div>
+						    </div>
+						{{/ifMobiAdvanceSetting}}
+					    {{#ifMobiAdvanceSetting 'productlist/enablesort'}}
+					    	<div class="filter-div {{#ifProductFilterView 'single,one_one'}}no-shadow{{/ifProductFilterView}}">
+						    	<div class="short-by">
+						    		<span class="label-txt">{{{GetLanguageTranslation 'Sort_By'}}}</span><br>
+									<div class="applied-label">
+										{{{sortOptionText}}}
+									</div>
+						    		<select id="sortby" class="select-hidden" data-role="none" onchange="app.product.filterApplied(this.value, '1');">
+										<option value="price-h-l" {{#ifCond sortOption '==' 'price-h-l'}}selected="selected"{{/ifCond}}>{{{GetLanguageTranslation 'Price-High_To_Low'}}}</option>
+										<option value="price-l-h" {{#ifCond sortOption '==' 'price-l-h'}}selected="selected"{{/ifCond}}>{{{GetLanguageTranslation 'Price-Low_To_High'}}}</option>
+										<option value="name-a-z" {{#ifCond sortOption '==' 'name-a-z'}}selected="selected"{{/ifCond}}>{{{GetLanguageTranslation 'Name-A_To_Z'}}}</option>
+										<option value="name-z-a" {{#ifCond sortOption '==' 'name-z-a'}}selected="selected"{{/ifCond}}>{{{GetLanguageTranslation 'Name-Z_To_A'}}}</option>
+										<option value="newest_first" {{#ifCond sortOption '==' 'newest_first'}}selected="selected"{{/ifCond}}>{{{GetLanguageTranslation 'Newest'}}}</option>
+									</select>
+						    	</div>
+						        <div class="short-by-active dhide"></div>
+						    </div>
+						{{/ifMobiAdvanceSetting}}
+						{{#ifMobiAdvanceSetting 'productlist/enablechangeproductview'}}
+				        	<div class="view-data {{#ifCond current_page_style '==' '1'}}list{{/ifCond}}{{#ifCond current_page_style '==' '2'}}grid{{/ifCond}}{{#ifCond current_page_style '==' '3'}}full{{/ifCond}}" onclick="app.product.changePageColumn();"></div>
+				        {{/ifMobiAdvanceSetting}}
+				    </div>
+				{{/ifProductFilterView}}
+
+				{{#ifProductFilterView 'viewonly'}}
+					<div class="only-view-bar theme-search">
+						<a href="javascript:void(0);" class="view view-list" onclick="app.product.changePageColumn('1');"><span>{{{GetLanguageTranslation 'List'}}}</span></a>
+					    <a href="javascript:void(0);" class="view view-grid" onclick="app.product.changePageColumn('2');"><span>{{{GetLanguageTranslation 'Grid'}}}</span></a>
+					    <a href="javascript:void(0);" class="view view-image" onclick="app.product.changePageColumn('3');"><span>{{{GetLanguageTranslation 'Image'}}}</span></a>
+					</div>
+				{{/ifProductFilterView}}
+			</div>
+		{{/ifProductFilterView}}
+	{{/ifCond}}
+</script>

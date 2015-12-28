@@ -1,0 +1,1 @@
+if(typeof(app) == 'undefined'){window.location.href = "http://mageboat.com/duc/dev/index.php/";}

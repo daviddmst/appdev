@@ -1,0 +1,11 @@
+<script id="h_cart_display_options" type="text/x-handlebars-template">
+	{{#if options}}
+		{{#ifEmptyObject options}}
+			{{#each options}}
+				<p class="color-light">
+					{{{this}}}{{#if @last}}{{else}},{{/if}}
+				</p>
+			{{/each}}
+		{{/ifEmptyObject}}
+	{{/if}}
+</script>

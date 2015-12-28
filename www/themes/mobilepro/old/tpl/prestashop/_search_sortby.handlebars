@@ -1,0 +1,32 @@
+<script id="h_search_sortby" type="text/x-handlebars-template">
+	<div class="theme-mainsearch">
+	
+		{{#ifCond tagId '==' ''}}
+			<div class="theme-search-form-div">
+				<form class="theme-search-form" onsubmit="return false;">
+			    	<input type="text" data-type="search" id="txtSearch" placeholder="{{{GetLanguageTranslation 'Search_Product'}}}" onchange="app.search.search(this.value);" value="{{term}}">
+				</form>
+			</div>
+		{{/ifCond}}
+		
+		{{#ifSearchFilterView 'all,sortonly,viewonly'}}
+			<div class="filter-bar theme-search refine-search">
+			    {{#ifMobiAdvanceSetting 'productlist/enablesort'}}
+					<div class="search-sortby">
+						<select id="sortby" class="select-hidden" onchange="app.search.loadSearchList(this.value, '1');" data-role="none">
+							<option value="price-h-l" {{#ifCond sortOption '==' 'price-h-l'}}selected="selected"{{/ifCond}}>{{{GetLanguageTranslation 'Price-High_To_Low'}}}</option>
+							<option value="price-l-h" {{#ifCond sortOption '==' 'price-l-h'}}selected="selected"{{/ifCond}}>{{{GetLanguageTranslation 'Price-Low_To_High'}}}</option>
+							<option value="name-a-z" {{#ifCond sortOption '==' 'name-a-z'}}selected="selected"{{/ifCond}}>{{{GetLanguageTranslation 'Name-A_To_Z'}}}</option>
+							<option value="name-z-a" {{#ifCond sortOption '==' 'name-z-a'}}selected="selected"{{/ifCond}}>{{{GetLanguageTranslation 'Name-Z_To_A'}}}</option>
+							<option value="newest_first" {{#ifCond sortOption '==' 'newest_first'}}selected="selected"{{/ifCond}}>{{{GetLanguageTranslation 'Newest'}}}</option>
+						</select>
+						<div class="short-by-active dhide"></div>
+					</div>
+				{{/ifMobiAdvanceSetting}}
+				{{#ifMobiAdvanceSetting 'productlist/enablechangeproductview'}}
+		        	<div class="view-data {{#ifCond current_page_style '==' '1'}}list{{/ifCond}} {{#ifCond current_page_style '==' '2'}}grid{{/ifCond}} {{#ifCond current_page_style '==' '3'}}full{{/ifCond}}" onclick="app.search.changePageColumn();"></div>
+		        {{/ifMobiAdvanceSetting}}
+			</div>
+		{{/ifSearchFilterView}}
+	</div>
+</script>

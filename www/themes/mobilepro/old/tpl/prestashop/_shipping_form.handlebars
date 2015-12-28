@@ -1,0 +1,20 @@
+<script id="h_shipping_form" type="text/x-handlebars-template">					
+	<div class="form_in shipping_form" style="display:none">
+		<div class="address-block">
+			<strong>{{{GetLanguageTranslation 'Select_a_shipping_address_from_your_address_book_or_enter_a_new_address'}}}</strong>
+			{{#ifEmptyObject unique_addresses}}
+				{{#each unique_addresses}}
+					<div class="add-block">
+						<input type="radio" name="shipping_address_id" value="{{id}}" id="shipping_address_id_{{id}}" onclick="app.f.showhide_checkout_address_area('{{id}}', 'div_new_shipping_address')" {{#ifCond @index '==' '0'}}checked{{/ifCond}}>
+	    				<label for="shipping_address_id_{{id}}">{{{fullname}}}<br>{{{street.[0]}}},{{#if street.[1]}} {{{street.[1]}}},{{/if}} {{{city}}}, {{{postcode}}}, {{{region}}}<br>{{{country}}}</label>
+	    			</div>
+				{{/each}}
+			{{/ifEmptyObject}}
+			
+			<div class="add-block">
+				<input type="radio" name="shipping_address_id" value="" id="shipping_address_id_new" onclick="app.f.showhide_checkout_address_area('', 'div_new_shipping_address')">
+	    		<label for="shipping_address_id_new">{{{GetLanguageTranslation 'New_Address'}}}</label>
+    		</div>
+		</div>
+	</div>
+</script>

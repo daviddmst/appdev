@@ -1,0 +1,70 @@
+<script id="h_product_filter_panel" type="text/x-handlebars-template">
+    <div data-role="popup" data-history="false" id="category-product-filter" data-dismissible="false" data-tolerance="0, 0, 0, 0" class="fullscreen-popup" data-transition="slidedown">
+    	<div data-role="header" class="topbar {{#ifMobiAdvanceSetting 'miscellaneous/enable_fixedheader'}}ui-popup-header-fixed{{/ifMobiAdvanceSetting}}">
+            <table border="0" class="topmenu-tab top-filter" cellpadding="0" cellspacing="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td class="ttl">
+                            <h1 class="ui-title">{{{GetLanguageTranslation 'Filter'}}}</h1>
+                        </td>
+                        <td width="46" align="right"><a class="filter-close" href="#" data-rel="back"></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div data-role="main" class="ui-content {{#ifMobiAdvanceSetting 'miscellaneous/enable_fixedheader'}}fullscreen-popup-ui-content{{/ifMobiAdvanceSetting}}">
+        	<div data-role="tabs" class="tab-nav">
+            	<ul data-role="none" data-inset="true" class="tablist-left">
+            		{{#if current_page_category.filter_options}}
+    					{{#current_page_category.filter_options}}
+    						<li><a href="#filter_attribute_{{attributeCodePresta}}" data-ajax="false">{{{label}}}</a></li>
+    					{{/current_page_category.filter_options}}
+    				{{/if}}
+                </ul>
+                <div class="tab-detail">
+                	{{#if current_page_category.filter_options}}
+    					{{#current_page_category.filter_options}}
+    	                    <div id="filter_attribute_{{attributeCodePresta}}" class="tablist-content" data-inset="true">
+    	                    	{{#ifInArray type 'select,price'}}
+    	                    		<form onsubmit="return false;" class="tab-content">
+    			                        <fieldset data-role="controlgroup">
+    			                        	{{#options}}
+    			                            	<input type="radio" name="{{../attributeCode}}" id="{{../attributeCode}}_{{{value}}}" value="{{{value}}}" class="productFilterRadios" {{#ifCategoryFilterSelected ../../../../filterSelected ../attributeCode value}}checked{{/ifCategoryFilterSelected}} />
+    											<label for="{{../attributeCode}}_{{{value}}}">{{{label}}}</label>
+    										{{/options}}
+    			                        </fieldset>
+    			                    </form>
+    		                    {{/ifInArray}}
+    	                    </div>
+    	                {{/current_page_category.filter_options}}
+    				{{/if}}
+                </div>
+            </div>
+            <div style="clear:both;">&nbsp;</div>
+        </div>
+        <div class="ui-footer ui-bar-inherit ui-footer-fixed slideup" data-position="fixed" data-role="footer">
+        	<div class="footer-button">
+                <a href="javascript:void(0);" onclick="app.f.applyProductFilter('1');" class="btn-clear" data-rel="back">{{{GetLanguageTranslation 'Clear_All'}}}</a>
+                <a href="javascript:void(0);" class="ui-btn ui-btn-c apply-all" onclick="app.f.applyProductFilter();" data-rel="back">{{{GetLanguageTranslation 'Apply'}}}</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        var apo = app.f.get_active_page_object();
+
+        function scrollFilterPanel(){
+            var filterHeight = window.innerHeight;
+            filterHeight = filterHeight - $(apo).find('#category-product-filter .ui-header').height() - $(apo).find('#category-product-filter .ui-footer').height();
+            filterHeight = filterHeight - 10;
+            if($('body').hasClass('ios-7')){
+                filterHeight = filterHeight - 20;
+            }
+            $(apo).find('.tablist-left,.tab-content').height(filterHeight);
+        }
+
+        $(apo).one("pageshow",function(){
+            scrollFilterPanel();
+        });
+        scrollFilterPanel();
+    <{{!}}/script>
+</script>

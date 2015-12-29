@@ -5,6 +5,14 @@ jQuery( document ).ready(function($) {
 	var base_url = window.location.href;
 	base_url = base_url.replace("index.html", "");;
 	console.log( base_url );
+	
+	$( document ).bind( "mobileinit", function() {
+		// Make your jQuery Mobile framework configuration changes here!
+		$.mobile.allowCrossDomainPages = true;
+		$.mobile.phonegapNavigationEnabled = true;
+		
+	});
+
 	// $.mobile.pageContainer = $('#container');
 	//$.mobile.defaultPageTransition = 'none';
 	MSTMOBILE={

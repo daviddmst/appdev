@@ -14,7 +14,7 @@ jQuery( document ).ready(function($) {
 	});
 
 	// $.mobile.pageContainer = $('#container');
-	//$.mobile.defaultPageTransition = 'none';
+	$.mobile.defaultPageTransition = 'none';
 	MSTMOBILE={
 		goback:function(){
 			//window.location.href = base_url + "themes/mobilepro/menu_account.html";		

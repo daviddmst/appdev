@@ -125,6 +125,40 @@
 
 		</script>
 		
+		<script type="text/javascript" charset="utf-8">
+
+		// wait for device API libraries to load
+		//
+		document.addEventListener("deviceready", onDeviceReady, false);
+
+		// device APIs are available
+		//
+		function onDeviceReady() {
+			navigator.geolocation.getCurrentPosition(onSuccess, onError);
+		}
+
+		// Display `Position` properties from the geolocation
+		//
+		function onSuccess(position) {
+			var div = document.getElementById('myDiv');
+
+			div.innerHTML = 'Latitude: '             + position.coords.latitude         + '<br/>' +
+							'Longitude: '            + position.coords.longitude        + '<br/>' +
+							'Altitude: '             + position.coords.altitude         + '<br/>' +
+							'Accuracy: '             + position.coords.accuracy         + '<br/>' +
+							'Altitude Accuracy: '    + position.coords.altitudeAccuracy + '<br/>' +
+							'Heading: '              + position.coords.heading          + '<br/>' +
+							'Speed: '                + position.coords.speed            + '<br/>';
+		}
+
+		// Show an alert if there is a problem getting the geolocation
+		//
+		function onError() {
+			alert('onError!');
+		}
+
+		</script>
+		
     </head>
      <body class="ui-mobile-viewport ui-overlay-a ml_en_US" style="overflow-y: auto;">
 		<!-- 
@@ -147,6 +181,10 @@
 				<button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
 				<img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
 				<img style="display:none;" id="largeImage" src="" />
+				<p>--------------------------</p>
+				Map<br>
+				<div id="myDiv"></div>
+				End Map<br>
 				<p>--------------------------</p>
 				<p><a class="icon-sub-menu ui-link" href="#" onclick="MSTMOBILE.redirect_menu_account();" >redirect_menu_account</a><br></p>
 				<p><a class="icon-sub-menu ui-link" href="#" onclick="MSTMOBILE.redirect_cart();" >redirect_cart</a><br></p>
